@@ -1,122 +1,87 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Libretto",
+  "theme": "luma",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#241c24",
+    "light": "#f4f4f4",
+    "dark": "#cb0404"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "https://media.brand.dev/ee9105b0-8d0c-41e8-bbf7-cf4889b3b518.png",
+  "logo": {
+    "light": "https://media.brand.dev/22a2a9f0-c94f-4bb0-b1d1-a8399e8d4538.svg",
+    "dark": "https://media.brand.dev/22a2a9f0-c94f-4bb0-b1d1-a8399e8d4538.svg"
+  },
+  "navbar": {
+    "primary": {
+      "type": "github",
+      "href": "https://github.com/saffron-health/libretto"
+    }
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/saffron-health/libretto"
+    }
+  },
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Documentation",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Get Started",
             "pages": [
-              "index",
+              "introduction",
               "quickstart",
-              "development"
+              "configuration"
             ]
           },
           {
-            "group": "Customization",
+            "group": "CLI Reference",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "cli/open-and-connect",
+              "cli/snapshot",
+              "cli/exec",
+              "cli/run-and-resume",
+              "cli/network-and-actions",
+              "cli/session-management"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Library API",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "api/workflow",
+              "api/extraction",
+              "api/network",
+              "api/recovery",
+              "api/instrumentation",
+              "api/logging"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "Guides",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Use Cases",
             "pages": [
-              "api-reference/introduction"
+              "guides/one-shot-script-generation",
+              "guides/interactive-script-building",
+              "guides/convert-to-network-requests",
+              "guides/debugging-workflows"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Concepts",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "guides/automation-approaches",
+              "guides/bot-detection",
+              "guides/sessions-and-profiles"
             ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
-  },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
-  },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
+    ]
   }
 }

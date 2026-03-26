@@ -1,97 +1,69 @@
 ---
-title: "Introduction"
-description: "Welcome to the new home for your documentation"
+title: "Libretto"
+description: "The AI toolkit for building and maintaining browser automations — give your coding agent a live browser and token-efficient CLI."
 ---
 
-## Setting up
+Libretto is an AI-powered browser automation toolkit built on Playwright. It gives your coding agent a live browser and a token-efficient CLI to inspect live pages, capture network traffic, record user actions, and debug broken workflows — all against the real site.
 
-Get your documentation site up and running in minutes.
-
-<Card
-  title="Start here"
-  icon="rocket"
-  href="/quickstart"
-  horizontal
->
-  Follow our three step quickstart guide.
-</Card>
-
-## Make it yours
-
-Design a docs site that looks great and empowers your users.
-
-<Columns cols={2}>
-  <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
-  >
-    Edit your docs locally and preview them in real time.
+<CardGroup cols={2}>
+  <Card title="Quick Start" icon="rocket" href="/quickstart">
+    Install Libretto and run your first browser automation in minutes.
   </Card>
-  <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
-  >
-    Customize the design and colors of your site to match your brand.
+  <Card title="CLI Reference" icon="terminal" href="/cli/open-and-connect">
+    Every command, flag, and option — from `open` to `run` to `network`.
   </Card>
-    <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
+  <Card title="Library API" icon="code" href="/api/workflow">
+    TypeScript APIs for workflows, extraction, recovery, and instrumentation.
   </Card>
-  <Card
-    title="API documentation"
-    icon="terminal"
-    href="/api-reference/introduction"
-  >
-    Auto-generate API documentation from OpenAPI specifications.
+  <Card title="Guides" icon="book-open" href="/guides/one-shot-script-generation">
+    Real-world use cases and automation concepts explained in depth.
   </Card>
-</Columns>
+</CardGroup>
 
-## Create beautiful pages
+## What Libretto does
 
-Everything you need to create world-class documentation.
+<Steps>
+  <Step title="Inspect live pages">
+    Run `npx libretto snapshot` to capture a screenshot and HTML of any open page, analyzed by an LLM to identify selectors, interactive elements, and page state — without flooding your agent's context window.
+  </Step>
+  <Step title="Capture network traffic">
+    Libretto records every network request during browser sessions. Use `npx libretto network` to view them, then reverse-engineer site APIs to build direct, faster integrations.
+  </Step>
+  <Step title="Record and replay actions">
+    Perform a workflow yourself in the browser — Libretto records every click, fill, and navigation as structured action logs. Ask your agent to turn those actions into a reusable automation script.
+  </Step>
+  <Step title="Debug broken workflows">
+    When a script fails, Libretto keeps the browser open. Use `snapshot` and `exec` to inspect the exact failed state, fix the code, and re-run to verify — all without restarting from scratch.
+  </Step>
+</Steps>
 
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
-  </Card>
-  <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
-  >
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
+## Use cases
 
-## Need inspiration?
+<CardGroup cols={2}>
+  <Card title="One-shot script generation" icon="wand-magic-sparkles" href="/guides/one-shot-script-generation">
+    Ask your agent to explore a site and generate a complete automation script from scratch.
+  </Card>
+  <Card title="Interactive script building" icon="display" href="/guides/interactive-script-building">
+    Show Libretto a workflow by doing it yourself, then let your agent turn your actions into code.
+  </Card>
+  <Card title="Convert to network requests" icon="arrow-right-arrow-left" href="/guides/convert-to-network-requests">
+    Convert brittle UI automations into direct API calls that are faster and more reliable.
+  </Card>
+  <Card title="Debugging workflows" icon="bug" href="/guides/debugging-workflows">
+    Reproduce failures, inspect live page state, and fix broken selectors interactively.
+  </Card>
+</CardGroup>
 
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
+## Key concepts
+
+<CardGroup cols={3}>
+  <Card title="Automation approaches" icon="sitemap" href="/guides/automation-approaches">
+    Playwright UI, passive interception, in-browser fetch, or direct HTTP — when to use each.
+  </Card>
+  <Card title="Bot detection" icon="shield" href="/guides/bot-detection">
+    Understand how sites detect automation and how to choose approaches that minimize risk.
+  </Card>
+  <Card title="Sessions and profiles" icon="folder-open" href="/guides/sessions-and-profiles">
+    Manage named browser sessions and persist authenticated state across runs.
+  </Card>
+</CardGroup>

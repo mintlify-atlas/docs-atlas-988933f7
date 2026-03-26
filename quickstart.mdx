@@ -1,80 +1,213 @@
 ---
-title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+title: "Quick start"
+description: "Install Libretto and run your first browser automation in minutes."
 ---
 
-## Get started in three steps
+This guide walks you through installing Libretto, connecting an AI provider, opening a browser, and taking your first snapshot.
 
-Get your documentation site running locally and make your first customization.
+<Steps>
+  <Step title="Install the package">
+    Install Libretto from npm:
 
-### Step 1: Set up your local environment
+    ```bash
+    npm install libretto
+    ```
 
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
+    Libretto requires Node.js 18 or later. It installs Playwright as a direct dependency, so you don't need a separate Playwright install.
+  </Step>
 
-### Step 2: Deploy your changes
+  <Step title="Initialize your workspace">
+    Run `init` once per project. This command downloads Chromium if it isn't already installed, creates the `.libretto/` directory structure, writes a `.libretto/.gitignore`, and copies the agent skill files into `.agents/skills/libretto` and `.claude/skills/libretto`.
 
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
+    ```bash
+    npx libretto init
+    ```
 
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
+    <Note>
+      Run `init` yourself in a terminal — not through an agent. It may prompt for input and starts a Chromium download that takes a moment.
+    </Note>
+  </Step>
 
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
+  <Step title="Configure an AI provider">
+    Snapshot analysis requires a vision-capable model. Choose your provider:
 
-### Step 3: Go live
+    ```bash
+    npx libretto ai configure openai
+    # or
+    npx libretto ai configure anthropic
+    # or
+    npx libretto ai configure gemini
+    # or
+    npx libretto ai configure vertex
+    ```
 
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
+    This writes the selected model to `.libretto/config.json`. The default models are:
 
-## Next steps
+    | Provider | Default model |
+    |---|---|
+    | `openai` | `openai/gpt-5.4` |
+    | `anthropic` | `anthropic/claude-sonnet-4-6` |
+    | `gemini` | `google/gemini-3-flash-preview` |
+    | `vertex` | `vertex/gemini-2.5-pro` |
 
-Now that you have your docs running, explore these key features:
+    You can also pass a full model string to use a specific version:
 
-<CardGroup cols={2}>
+    ```bash
+    npx libretto ai configure openai/gpt-4o
+    ```
 
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
+    Provider credentials are read from your shell environment or a `.env` file at the project root. Set the appropriate key:
 
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
+    <CodeGroup>
+    ```bash OpenAI
+    export OPENAI_API_KEY=sk-...
+    ```
 
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
+    ```bash Anthropic
+    export ANTHROPIC_API_KEY=sk-ant-...
+    ```
 
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
+    ```bash Gemini
+    export GEMINI_API_KEY=...
+    ```
 
-</CardGroup>
+    ```bash Vertex
+    export GOOGLE_CLOUD_PROJECT=my-project
+    ```
+    </CodeGroup>
 
-<Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
-</Note>
+    Libretto uses the Vercel AI SDK under the hood. Install only the peer dependency for your chosen provider:
+
+    <CodeGroup>
+    ```bash OpenAI
+    npm install @ai-sdk/openai
+    ```
+
+    ```bash Anthropic
+    npm install @ai-sdk/anthropic
+    ```
+
+    ```bash Gemini
+    npm install @ai-sdk/google
+    ```
+
+    ```bash Vertex
+    npm install @ai-sdk/google-vertex
+    ```
+    </CodeGroup>
+  </Step>
+
+  <Step title="Open a browser">
+    Launch a headed Chromium window and navigate to a URL:
+
+    ```bash
+    npx libretto open https://example.com
+    ```
+
+    To use a named session (recommended when running multiple automations):
+
+    ```bash
+    npx libretto open https://example.com --session my-session
+    ```
+
+    Use `--headless` if you don't need to see the browser:
+
+    ```bash
+    npx libretto open https://example.com --headless --session my-session
+    ```
+  </Step>
+
+  <Step title="Take a snapshot">
+    `snapshot` captures a PNG screenshot and the page HTML, then sends both to your configured vision model. Always provide `--objective` (what you want the model to find or analyze) and `--context` (what you know about the current state):
+
+    ```bash
+    npx libretto snapshot \
+      --objective "Find the main heading and any call-to-action buttons" \
+      --context "I just opened the example.com homepage and want to identify the key interactive elements."
+    ```
+
+    With a named session:
+
+    ```bash
+    npx libretto snapshot \
+      --session my-session \
+      --objective "Explain why the table is empty" \
+      --context "I applied filters on the referrals page and expected rows to appear."
+    ```
+
+    The model returns a structured summary of selectors, element descriptions, and any relevant observations — without putting raw HTML into your agent's context.
+
+    <Tip>
+      A single snapshot objective can include multiple questions. Instead of running several snapshots, combine them: `--objective "Find the submit button and check whether the form has validation errors."`
+    </Tip>
+  </Step>
+
+  <Step title="Execute Playwright code">
+    Use `exec` to run Playwright TypeScript against the open page. The code runs in a context that has `page`, `context`, `browser`, `state`, `fetch`, and `Buffer` available as globals:
+
+    ```bash
+    npx libretto exec "return await page.url()"
+    ```
+
+    ```bash
+    npx libretto exec "return await page.locator('button').count()"
+    ```
+
+    ```bash
+    npx libretto exec "await page.locator('button:has-text(\"Continue\")').click()"
+    ```
+
+    For longer scripts, pipe from stdin with `-`:
+
+    ```bash
+    echo "return await page.url()" | npx libretto exec - --session my-session
+    ```
+
+    Let failures throw. Don't wrap `exec` code in `try/catch` — surfacing errors is how you debug.
+  </Step>
+
+  <Step title="Run a workflow file">
+    Once you've built a workflow file, run it with `npx libretto run`:
+
+    ```bash
+    npx libretto run ./integration.ts main
+    ```
+
+    Run headless with input parameters:
+
+    ```bash
+    npx libretto run ./integration.ts main --headless --params '{"status":"open"}'
+    ```
+
+    Run with a saved auth profile:
+
+    ```bash
+    npx libretto run ./integration.ts main --auth-profile app.example.com
+    ```
+
+    The second argument (`main`) is the name of the exported `workflow()` instance in the file. See the Library API reference for how to structure workflow files.
+  </Step>
+</Steps>
+
+## What's next
+
+<Tip>
+  If you're using a coding agent like Claude or another AI assistant, load the Libretto skill so your agent knows how to use these commands effectively. After running `npx libretto init`, the skill is available at `.agents/skills/libretto/SKILL.md` and `.claude/skills/libretto/SKILL.md`.
+</Tip>
+
+Once Libretto is set up, explore the full command set:
+
+```bash
+npx libretto --help
+```
+
+Common commands to try next:
+
+```bash
+npx libretto network                    # view captured HTTP requests
+npx libretto actions                    # view recorded user/agent actions
+npx libretto pages                      # list open pages in the session
+npx libretto save app.example.com       # save authenticated browser state
+npx libretto close                      # close the browser
+npx libretto close --all                # close all sessions
+```

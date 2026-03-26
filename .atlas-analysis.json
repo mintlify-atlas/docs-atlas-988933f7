@@ -1,0 +1,107 @@
+{
+  "projectType": "cli-tool",
+  "projectName": "Libretto",
+  "projectDescription": "An AI-powered browser automation toolkit and CLI built on Playwright for building, maintaining, and debugging browser automation workflows.",
+  "theme": "luma",
+  "primaryColor": "#241c24",
+  "lightColor": "#f4f4f4",
+  "darkColor": "#cb0404",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "configuration"
+            ]
+          },
+          {
+            "group": "CLI Reference",
+            "pages": [
+              "cli/open-and-connect",
+              "cli/snapshot",
+              "cli/exec",
+              "cli/run-and-resume",
+              "cli/network-and-actions",
+              "cli/session-management"
+            ]
+          },
+          {
+            "group": "Library API",
+            "pages": [
+              "api/workflow",
+              "api/extraction",
+              "api/network",
+              "api/recovery",
+              "api/instrumentation",
+              "api/logging"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "Use Cases",
+            "pages": [
+              "guides/one-shot-script-generation",
+              "guides/interactive-script-building",
+              "guides/convert-to-network-requests",
+              "guides/debugging-workflows"
+            ]
+          },
+          {
+            "group": "Concepts",
+            "pages": [
+              "guides/automation-approaches",
+              "guides/bot-detection",
+              "guides/sessions-and-profiles"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Live browser inspection with token-efficient AI-powered snapshot analysis",
+    "Network traffic capture to reverse-engineer site APIs",
+    "Action recording and replay for building automation scripts",
+    "Interactive debugging with pause/resume workflow support",
+    "Multi-provider AI support (OpenAI, Anthropic, Gemini, Vertex)",
+    "TypeScript library with recovery, extraction, and instrumentation APIs",
+    "Session management with persistent browser profiles",
+    "Playwright-based automation with ghost cursor visualization"
+  ],
+  "publicApiSurface": [
+    "workflow(handler) — define a reusable browser automation workflow",
+    "launchBrowser(args) — launch a Playwright browser session",
+    "extractFromPage(options) — AI-powered structured data extraction from pages",
+    "pageRequest(page, config) — execute typed fetch calls inside browser context",
+    "attemptWithRecovery(page, fn) — run automation with automatic popup recovery",
+    "executeRecoveryAgent(page, instruction) — run an LLM recovery agent on a page",
+    "instrumentPage(page, options) — add visualization and error enrichment to a page",
+    "instrumentContext(context, options) — instrument all pages in a browser context",
+    "installInstrumentation(page, options) — in-place page instrumentation",
+    "pause(session) — pause a workflow for interactive debugging",
+    "Logger / defaultLogger — structured logging with pluggable sinks",
+    "createLLMClientFromModel(model) — create an AI SDK LLM client",
+    "downloadViaClick(page, options) — trigger and capture file downloads",
+    "downloadAndSave(page, options) — download and persist files to disk",
+    "npx libretto init — first-time workspace setup",
+    "npx libretto open <url> — launch browser and open URL",
+    "npx libretto snapshot — capture and analyze page with AI",
+    "npx libretto exec <code> — run Playwright TypeScript against open page",
+    "npx libretto run <file> <export> — execute a workflow file",
+    "npx libretto resume — resume a paused workflow",
+    "npx libretto network — view captured network requests",
+    "npx libretto actions — view recorded user/agent actions",
+    "npx libretto save <domain> — save browser session for reuse",
+    "npx libretto connect <url> — attach to existing CDP endpoint",
+    "npx libretto ai configure <provider> — configure AI snapshot model"
+  ]
+}
